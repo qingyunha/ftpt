@@ -37,6 +37,14 @@ def upload(path=""):
         return redirect("/" + path)
 
 
+@app.route("/newfolder/", methods=["POST"])
+@app.route("/newfolder/<path:path>", methods=["POST"])
+def new_folder(path=""):
+    folder = request.form["name"]
+    os.mkdir(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], path,
+        folder))
+    return redirect("/" + path)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
